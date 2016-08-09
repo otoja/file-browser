@@ -32,6 +32,7 @@ angular.module("macFileBrowser", [])
 
             $scope.options = {
                 width: 350,
+                height: 200,
                 nodes: nodes,
                 children: 'children'
             };

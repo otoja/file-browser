@@ -3,6 +3,9 @@
     Created on : 2016-08-08, 19:59:11
     Author     : Kamila Przychodzen <kamila.przychodzen@gmail.com>
 */
+a{
+    cursor: pointer;
+}
 #file-browser{
     overflow-x: auto;
     white-space: nowrap;
@@ -13,15 +16,16 @@
     border: 1px solid black;
     display: inline-block;
     vertical-align:top;
-    height:200px;
     margin: 0px; 
     padding: 10px 5px 0 0;
 }
 .browser-panel > ul > li {
     text-decoration: none;
     list-style: none;
-    color: black;
     cursor: pointer;
+}
+.browser-panel > ul > li > a{
+    color:black;
 }
 .selected{
     font-weight: bolder;
