@@ -15,23 +15,25 @@ angular.module("macFileBrowser", [])
             var deselectNodes = function (nodes) {
                 _.each(nodes, function (n) {
                     n.selected = false;
+                    _.each(n.children, function (c) {
+                        c.selected = false;
+                    });
                 });
             };
 
             var getChildrenNodes = function (parentNode) {
                 var children = [];
-                var types = [0, 144];
 
                 for (var i = 1; i < 7; i++) {
-                    var rand = types[Math.floor(Math.random() * types.length)];
-                    children.push({id: parentNode.id + i + (Math.floor(Math.random() * 13)), parentId: parentNode.id, name: parentNode.name + ' ' + i, type: rand, children: []});
+                    children.push({id: parentNode.id + i + (Math.floor(Math.random() * 6778998766)), parentId: parentNode.id, name: parentNode.name + ' ' + i, type: 0, children: []});
                 }
                 return children;
             };
 
             $scope.options = {
                 width: 350,
-                nodes: nodes
+                nodes: nodes,
+                children: 'children'
             };
 
             $scope.selectNode = function (node, evt) {
@@ -64,22 +66,18 @@ angular.module("macFileBrowser", [])
             };
 
             o.addToPath = function (node) {
-                if (node.parentId === -1 || (o._ancestorsContainsNode(node.parentId) && !o._ancestorsContainsNode(node.id))) {
-                    var parentNode = _.findWhere(o._ancestors, {id: node.parentId});
-                    if (!parentNode) {
-                        o._clearAncestors();
-                    } else {
-                        o._ancestors = o._ancestors.slice(0, o._ancestors.indexOf(parentNode) + 1);
-                    }
-                    o._ancestors.push(node);
+                var parentNode = _.findWhere(o._ancestors, {id: node.parentId});
+                if (!parentNode) {
+                    o._clearAncestors();
+                } else {
+                    o._ancestors = o._ancestors.slice(0, o._ancestors.indexOf(parentNode) + 1);
                 }
+                o._ancestors.push(node);
             };
 
             o.getAncestors = function () {
                 return o._ancestors;
             };
-
-
 
             return o;
         });

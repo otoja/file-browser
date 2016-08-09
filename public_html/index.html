@@ -3,7 +3,6 @@
     <head>
         <title>File Browser</title>
 
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -23,19 +22,20 @@
     <body>
         <div ng-app="macFileBrowser">
             <div ng-controller="MacFileBrowserCtrl">
+                <div>JV / <span ng-repeat="ancestor in ancestors"><a ng-click="selectNode(ancestor, $event)">{{ancestor.name}} /</a></span></div>
                 <div id="file-browser" >
                     <div  class="browser-panel" style="width: {{options.width}}px; margin-right: -5px;">
                         <ul>
                             <li ng-repeat="node in options.nodes" >
-                                <i class="fa" ng-class="{'fa-folder': node.type === 0, 'fa-folder-open':node.type === 0 && node.selected, 'fa-file':node.type === 144}" aria-hidden="true"></i>
+                                <i class="fa" ng-class="{'fa-folder': node.type === 0, 'fa-folder-open':node.type === 0 && node.selected}" aria-hidden="true"></i>
                                 <a ng-click="selectNode(node, $event)" ng-class="{'selected':node.selected}">{{node.name}}</a>
                             </li>
                         </ul>
                     </div>
-                    <div ng-repeat="ancestor in ancestors"  class="browser-panel" style="width: {{options.width}}px; " ng-if="ancestor.children.length">
+                    <div ng-repeat="ancestor in ancestors"  class="browser-panel" style="width: {{options.width}}px; " ng-if="ancestor[options.children].length">
                         <ul>
-                            <li ng-repeat="node in ancestor.children" >
-                                <i class="fa" ng-class="{'fa-folder': node.type === 0, 'fa-folder-open':node.type === 0 && node.selected, 'fa-file':node.type === 144}" aria-hidden="true"></i>
+                            <li ng-repeat="node in ancestor[options.children]" >
+                                <i class="fa" ng-class="{'fa-folder': node.type === 0, 'fa-folder-open':node.type === 0 && node.selected}" aria-hidden="true"></i>
                                 <a ng-click="selectNode(node, $event)" ng-class="{'selected':node.selected}">{{node.name}}</a>
                             </li>
                         </ul>
