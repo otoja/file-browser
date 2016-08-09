@@ -1,0 +1,27 @@
+
+/* 
+    Created on : 2016-08-08, 19:59:11
+    Author     : Kamila Przychodzen <kamila.przychodzen@gmail.com>
+*/
+#file-browser{
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.browser-panel{
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align:top;
+    height:200px;
+    margin: 0px; 
+}
+.browser-panel > ul > li {
+    text-decoration: none;
+    list-style: none;
+    color: black;
+    cursor: pointer;
+}
+.selected{
+    font-weight: bolder;
+}

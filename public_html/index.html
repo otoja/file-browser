@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>File Browser</title>
+
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
+        <link href="lib/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet">
+
+        <link href="css/main.css" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-sanitize.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
+
+        <script src="js/macFileBrowser.js"></script> 
+    </head>
+    <body>
+        <div ng-app="macFileBrowser">
+            <div ng-controller="MacFileBrowserCtrl">
+                <div id="file-browser" >
+                    <div  class="browser-panel" style="width: {{options.width}}px; margin-right: -5px;">
+                        <ul>
+                            <li ng-repeat="node in options.nodes" >
+                                <i class="fa" ng-class="{'fa-folder': node.type === 0, 'fa-folder-open':node.type === 0 && node.selected, 'fa-file':node.type === 144}" aria-hidden="true"></i>
+                                <a ng-click="selectNode(node, $event)" ng-class="{'selected':node.selected}">{{node.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-repeat="ancestor in ancestors"  class="browser-panel" style="width: {{options.width}}px; " ng-if="ancestor.children.length">
+                        <ul>
+                            <li ng-repeat="node in ancestor.children" >
+                                <i class="fa" ng-class="{'fa-folder': node.type === 0, 'fa-folder-open':node.type === 0 && node.selected, 'fa-file':node.type === 144}" aria-hidden="true"></i>
+                                <a ng-click="selectNode(node, $event)" ng-class="{'selected':node.selected}">{{node.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
